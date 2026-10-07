@@ -1,0 +1,3 @@
+.scene{background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.scene .sun,.scene .cloud,.scene .skyline,.scene .track-lines{display:none}
+.app-shell.is-running .hero{display:flex;flex-direction:column;align-items:center;padding-top:24px}.app-shell.is-running .hero-copy{text-align:center;width:100%}.app-shell.is-running .mode-row{justify-content:center}.app-shell.is-running .dial-wrap{margin:4px auto 0}.app-shell.is-running .session-line{width:100%;max-width:350px}

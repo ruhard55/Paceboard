@@ -1,0 +1,14 @@
+{
+  "name": "Paceboard Interval Runner",
+  "short_name": "Paceboard",
+  "description": "Offline interval timer for Walk, Jog, Run, and Sprint workouts.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#09111d",
+  "theme_color": "#09111d",
+  "orientation": "any",
+  "icons": [
+    { "src": "assets/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

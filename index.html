@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#09111d" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Paceboard" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="assets/icon-180.png" />
+    <title>Paceboard — Interval Runner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="screens.css" />
+    <link rel="stylesheet" href="minimal-scene.css" />
+    <link rel="stylesheet" href="sprint.css" />
+    <style>#runner-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2}.scene .runner{z-index:1}.scene-label{z-index:3}</style>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">↗</span><span>PACEBOARD</span></div>
+        <button class="icon-button" id="soundToggle" aria-label="Toggle sound">◖</button>
+      </header>
+
+      <section class="hero timer-screen" id="timerScreen" aria-live="polite">
+        <div class="hero-copy">
+          <p class="eyebrow" id="setLabel">SET 01 / 08</p>
+          <div class="mode-row"><h1 id="activeMode">WALK</h1><span id="nextMode">RUN →</span></div>
+        </div>
+        <div class="dial-wrap">
+          <svg class="dial" viewBox="0 0 340 340" aria-label="Interval countdown">
+            <circle class="dial-track" cx="170" cy="170" r="145" />
+            <circle class="dial-progress" id="dialProgress" cx="170" cy="170" r="145" />
+            <g id="ticks"></g>
+          </svg>
+          <div class="time-readout"><strong id="timeReadout">03:00</strong><span id="phaseCaption">NEXT · RUN 01:00</span></div>
+        </div>
+        <div class="session-line"><span id="sessionStatus">READY WHEN YOU ARE</span><span id="totalTime">TOTAL 32:00</span></div>
+      </section>
+
+      <section class="scene timer-screen" aria-label="Runner animation">
+        <canvas id="runner-canvas"></canvas>
+        <div class="sprite-runner" id="spriteRunner" role="img" aria-label="Animated runner"></div>
+        <div class="sun"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div>
+        <div class="skyline"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="track-lines"><span></span><span></span><span></span></div>
+        <div class="runner runner-walk" id="runner" aria-hidden="true">
+          <div class="runner-shadow"></div><div class="hair"></div><div class="head"></div><div class="pony"></div>
+          <div class="torso"></div><div class="arm arm-back"></div><div class="arm arm-front"></div>
+          <div class="leg leg-back"></div><div class="leg leg-front"></div><div class="shoe shoe-back"></div><div class="shoe shoe-front"></div>
+        </div>
+        <div class="scene-label"><span class="scene-dot"></span><span id="sceneMode">WALKING THE DISTANCE</span></div>
+      </section>
+
+      <section class="controls" id="setupPanel">
+        <div class="section-heading"><div><p class="eyebrow">YOUR INTERVAL</p><h2>Build one set</h2></div><span class="sets-badge"><b id="setsPreview">08</b> SETS</span></div>
+        <div class="mode-grid">
+          <label class="mode-card mode-walk"><span class="mode-name"><i></i>WALK</span><span class="stepper"><button data-action="minus" data-mode="walk">−</button><output id="walkValue">03</output><button data-action="plus" data-mode="walk">+</button></span><small>MINUTES</small></label>
+          <label class="mode-card mode-jog"><span class="mode-name"><i></i>JOG</span><span class="stepper"><button data-action="minus" data-mode="jog">−</button><output id="jogValue">00</output><button data-action="plus" data-mode="jog">+</button></span><small>MINUTES</small></label>
+          <label class="mode-card mode-run"><span class="mode-name"><i></i>RUN</span><span class="stepper"><button data-action="minus" data-mode="run">−</button><output id="runValue">01</output><button data-action="plus" data-mode="run">+</button></span><small>MINUTES</small></label>
+          <label class="mode-card mode-sprint"><span class="mode-name"><i></i>SPRINT</span><span class="stepper"><button data-action="minus" data-mode="sprint">−</button><output id="sprintValue">00</output><button data-action="plus" data-mode="sprint">+</button></span><small>MINUTES</small></label>
+        </div>
+        <div class="sets-control"><span class="mode-name"><i></i>REPEAT SET</span><div class="stepper"><button data-action="minus" data-mode="sets">−</button><output id="setsValue">08</output><button data-action="plus" data-mode="sets">+</button></div><small>ROUNDS</small></div>
+        <button class="start-button" id="startButton"><span>START SESSION</span><b>↗</b></button>
+      </section>
+      <button class="back-button timer-screen" id="backButton">← BACK TO SETUP</button>
+      <footer><span>PACEBOARD / INTERVAL ENGINE</span><span id="footerHint">TAP START TO BEGIN</span></footer>
+    </main>
+    <script src="app.js"></script>
+    <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
+    <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+    <script type="module" src="runner3d.js"></script>
+  </body>
+</html>
